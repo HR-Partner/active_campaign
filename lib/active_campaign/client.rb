@@ -25,6 +25,7 @@ module ActiveCampaign
     endpoint :field_values
     endpoint :groups
     endpoint :lists
+    endpoint :email_activities
     endpoint :pipelines
     endpoint :tags
     endpoint :users
@@ -90,8 +91,6 @@ module ActiveCampaign
       raise ParsingError, e
     rescue ::Faraday::BadRequestError => e
       raise BadRequestError, e
-    rescue ::Faraday::ConnectionFailed => e
-      raise Unreachable, e
     rescue ::Faraday::UnauthorizedError => e
       raise UnauthorizedError, e
     rescue ::Faraday::ForbiddenError => e
@@ -102,8 +101,6 @@ module ActiveCampaign
       raise ProxyAuthError, e
     rescue ::Faraday::ConflictError => e
       raise ConflictError, e
-    rescue ::Faraday::UnauthorizedError => e
-      raise UnauthorizedError, e
     rescue ::Faraday::UnprocessableEntityError => e
       raise UnprocessableEntityError, e
     rescue ::Faraday::ServerError => e
